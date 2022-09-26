@@ -1,4 +1,4 @@
-
+import kotlin.math.round
 
 fun main(args: Array<String>) {
     println("Pay Slip Printer")
@@ -9,38 +9,44 @@ var firstName: String = "Joe "
 var surName: String = "Soap "
 var gender: Char = 'm'
 var employeeId: Int = 6143
-var grossSalary:Float = 67543.21f
-var PAYE: Float = 38.5f
-var PRSI: Float = 5.2f
-var annualBonusAmount: Float = 1450.50f
-var cycleToWorkSchemeMonthlyDeduction: Float = 54.33f
-var monthlySalary = grossSalary/12
-var monthlyBonus = annualBonusAmount/12
-var grossPay = monthlySalary+monthlyBonus
+var grossSalary:Double = 67543.21
+var PAYE: Double = 38.5
+var PRSI: Double = 5.2
+var annualBonusAmount: Double = 1450.50
+var cycleToWorkSchemeMonthlyDeduction: Double = 54.33
 
-var payePayableMonthly = monthlySalary*PAYE/100*1
-var prsiPayableMonthly = monthlySalary*PRSI/100*1
-var totalDeductions = payePayableMonthly+prsiPayableMonthly+cycleToWorkSchemeMonthlyDeduction
-var netPay =  grossPay - totalDeductions
+var monthlySalary = roundTwoDecimals(grossSalary/12)
+var monthlyBonus = roundTwoDecimals(annualBonusAmount/12)
+var grossPay = roundTwoDecimals(monthlySalary+monthlyBonus)
 
+var payePayableMonthly = roundTwoDecimals(monthlySalary*PAYE/100*1)
+var prsiPayableMonthly = roundTwoDecimals(monthlySalary*PRSI/100*1)
+var totalDeductions = roundTwoDecimals(payePayableMonthly+prsiPayableMonthly+cycleToWorkSchemeMonthlyDeduction)
+var netPay =  roundTwoDecimals(grossPay - totalDeductions)
+
+fun roundTwoDecimals(number: Double) = round(number * 100) / 100
 
 
 fun printPayslip(){
-    println("\t\t\t\t\t\t\t\t Monthly Payslip")
-    println()
-    println()
-    println("Employee Name: $firstName $surName ( ${gender.uppercase()} ) \t\t\t\t\t\t\t\t Employee ID: $employeeId")
-    println()
-    println()
-    println()
-    println("PAYMENT DETAILS \t\t\t\t\t\t\t DEDUCTION DETAILS")
-    println()
-    println("Salary: ${"%.2f".format(monthlySalary)}\t\t\t\t\t\t\t\t PAYE: ${"%.2f".format(payePayableMonthly)}")
-    println("Bonus:  ${"%.2f".format(monthlyBonus)}\t\t\t\t\t\t\t\t PRSI: ${"%.2f".format(prsiPayableMonthly)}")
-    println("\t\t\t\t\t\t\t\t\t\t\t Cycle To Work: $cycleToWorkSchemeMonthlyDeduction")
-    println()
-    println("Gross: ${"%.2f".format(grossPay)}\t\t\t\t\t\t\t\t Total Deductions: ${"%.2f".format(totalDeductions)}")
+    println(
+        """
+            -------------------------------------------------------------------------------
+                                             Monthly Payslip:   
+            -------------------------------------------------------------------------------
+             Employee Name: ${firstName.uppercase()}${surName.uppercase()}(${gender.uppercase()})                         Employee ID: $employeeId
+            
+            -------------------------------------------------------------------------------
+               PAYMENT DETAILS                           DEDUCTION DETAILS       
+            -------------------------------------------------------------------------------
+                Salary: ${(monthlySalary)}                           PAYE: ${(payePayableMonthly)} 
+                Bonus:  ${(monthlyBonus)}                           PRSI: ${(prsiPayableMonthly)}
+                                                         Cycle To Work: ${(cycleToWorkSchemeMonthlyDeduction)}
+            ------------------------------------------------------------------------------- 
+                Gross:  ${(grossPay)}                         Total Deductions: ${(totalDeductions)}    
+            -------------------------------------------------------------------------------
+                                           NET PAY: ${(netPay)}
+            -------------------------------------------------------------------------------                               
+                    """.trimIndent()
+    )
 
-    println()
-    println("\t\t\t\t\t\t NET PAY: ${"%.2f".format(netPay)}")
 }
