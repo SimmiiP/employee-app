@@ -1,7 +1,7 @@
 import kotlin.math.round
 
 fun main(args: Array<String>) {
-    println("Pay Slip Printer")
+    println(getFullName())
     printPayslip()
 }
 
@@ -15,6 +15,8 @@ var PRSI: Double = 5.2
 var annualBonusAmount: Double = 1450.50
 var cycleToWorkSchemeMonthlyDeduction: Double = 54.33
 
+
+
 var monthlySalary = roundTwoDecimals(grossSalary/12)
 var monthlyBonus = roundTwoDecimals(annualBonusAmount/12)
 var grossPay = roundTwoDecimals(monthlySalary+monthlyBonus)
@@ -25,6 +27,11 @@ var totalDeductions = roundTwoDecimals(payePayableMonthly+prsiPayableMonthly+cyc
 var netPay =  roundTwoDecimals(grossPay - totalDeductions)
 
 fun roundTwoDecimals(number: Double) = round(number * 100) / 100
+fun getFullName() = when (gender) {
+        'm', 'M' -> "Mr. $firstName $surName"
+        'f', 'F' -> "Ms. $firstName $surName"
+    else  -> "$firstName $surName"
+}
 
 
 fun printPayslip(){
