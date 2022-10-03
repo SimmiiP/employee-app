@@ -20,8 +20,8 @@ fun main(args: Array<String>) {
     println("PRSI: ${prsiPayableMonthly()}")
     println("Total Deductions: ${totalDeductions()}")
     println("Net Pay: ${netPay()}")
+    println(getPayslip())
 
-    printPayslip()
 }
 
 fun monthlySalary() = roundTwoDecimals(grossSalary/12)
@@ -41,7 +41,7 @@ fun getFullName() = when (gender) {
 }
 
 
-fun printPayslip(){
+fun getPayslip(){
     println(
         """
             -------------------------------------------------------------------------------
