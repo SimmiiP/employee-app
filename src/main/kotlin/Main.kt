@@ -1,16 +1,6 @@
 import kotlin.math.round
 
 
-var firstName: String = "Joe "
-var surName: String = "Soap "
-var gender: Char = 'm'
-var employeeId: Int = 6143
-var grossSalary:Double = 67543.21
-var PAYE: Double = 38.5
-var PRSI: Double = 5.2
-var annualBonusAmount: Double = 1450.50
-var cycleToWorkSchemeMonthlyDeduction: Double = 54.33
-
 fun main(args: Array<String>) {
 
     var input: Int
@@ -57,20 +47,20 @@ fun menu() : Int{
     Enter Option : """.trimIndent())
     return readLine()!!.toInt()
 }
-fun monthlySalary() = roundTwoDecimals(grossSalary/12)
-fun monthlyBonus() = roundTwoDecimals(annualBonusAmount/12)
+fun monthlySalary() = roundTwoDecimals(employee.grossSalary/12)
+fun monthlyBonus() = roundTwoDecimals(employee.annualBonusAmount/12)
 fun grossPay() = roundTwoDecimals(monthlySalary()+monthlyBonus())
 
-fun payePayableMonthly() = roundTwoDecimals(monthlySalary()*PAYE/100*1)
-fun prsiPayableMonthly() = roundTwoDecimals(monthlySalary()*PRSI/100*1)
-fun totalDeductions() = roundTwoDecimals(payePayableMonthly()+prsiPayableMonthly()+cycleToWorkSchemeMonthlyDeduction)
+fun payePayableMonthly() = roundTwoDecimals(monthlySalary()*employee.PAYE/100*1)
+fun prsiPayableMonthly() = roundTwoDecimals(monthlySalary()*employee.PRSI/100*1)
+fun totalDeductions() = roundTwoDecimals(payePayableMonthly()+prsiPayableMonthly()+employee.cycleToWorkSchemeMonthlyDeduction)
 fun netPay() = roundTwoDecimals(grossPay()- totalDeductions())
 
 fun roundTwoDecimals(number: Double) = round(number * 100) / 100
-fun getFullName() = when (gender) {
-        'm', 'M' -> "Mr. $firstName $surName"
-        'f', 'F' -> "Ms. $firstName $surName"
-    else  -> "$firstName $surName"
+fun getFullName() = when (employee.gender) {
+        'm', 'M' -> "Mr. $employee.firstName $employee.surName"
+        'f', 'F' -> "Ms. $employee.firstName $employee.surName"
+    else  -> "$employee.firstName $employee.surName"
 }
 
 
@@ -80,14 +70,14 @@ fun getPayslip(){
             -------------------------------------------------------------------------------
                                              Monthly Payslip:   
             -------------------------------------------------------------------------------
-             Employee Name: ${firstName.uppercase()}${surName.uppercase()}(${gender.uppercase()})                         Employee ID: $employeeId
+             Employee Name: ${employee.firstName.uppercase()}${employee.surName.uppercase()}(${employee.gender.uppercase()})                         Employee ID: ${employee.employeeId}
             
             -------------------------------------------------------------------------------
                PAYMENT DETAILS                           DEDUCTION DETAILS       
             -------------------------------------------------------------------------------
                 Salary: ${(monthlySalary())}                           PAYE: ${(payePayableMonthly())} 
                 Bonus:  ${(monthlyBonus())}                           PRSI: ${(prsiPayableMonthly())}
-                                                         Cycle To Work: ${(cycleToWorkSchemeMonthlyDeduction)}
+                                                         Cycle To Work: ${(employee.cycleToWorkSchemeMonthlyDeduction)}
             ------------------------------------------------------------------------------- 
                 Gross:  ${(grossPay())}                         Total Deductions: ${(totalDeductions())}    
             -------------------------------------------------------------------------------
