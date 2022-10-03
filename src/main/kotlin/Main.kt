@@ -2,6 +2,7 @@ import kotlin.math.round
 
 
 fun main(args: Array<String>) {
+    add()
 
     var input: Int
 
@@ -86,4 +87,27 @@ fun getPayslip(){
                     """.trimIndent()
     )
 
+}
+
+fun add(){
+    print("Enter first name: ")
+    val firstName = readLine().toString()
+    print("Enter surname: ")
+    val surName = readLine().toString()
+    print("Enter gender (m/f): ")
+    val gender = readLine()!!.toCharArray()[0]
+    print("Enter Employee ID: ")
+    val employeeId = readLine()!!.toInt()
+    print("Enter Gross Salary: ")
+    val grossPay = readLine()!!.toDouble()
+    print("Enter PAYE %: ")
+    val payePayableMonthly = readLine()!!.toDouble()
+    print("Enter PRSI %: ")
+    val prsiPayableMonthly = readLine()!!.toDouble()
+    print("Enter Annual Bonus: ")
+    val annualBonusAmount = readLine()!!.toDouble()
+    print("Enter Cycle To Work Deduction: ")
+    val cycleToWorkMonthlyDeduction = readLine()!!.toDouble()
+
+    employee = Employee(firstName, surName, gender, employeeId, grossPay, payePayableMonthly, prsiPayableMonthly, annualBonusAmount, cycleToWorkMonthlyDeduction)
 }
