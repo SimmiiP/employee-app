@@ -1,9 +1,5 @@
 import kotlin.math.round
 
-fun main(args: Array<String>) {
-    println(getFullName())
-    printPayslip()
-}
 
 var firstName: String = "Joe "
 var surName: String = "Soap "
@@ -15,16 +11,27 @@ var PRSI: Double = 5.2
 var annualBonusAmount: Double = 1450.50
 var cycleToWorkSchemeMonthlyDeduction: Double = 54.33
 
+fun main(args: Array<String>) {
+    println(getFullName())
+    println("Monthly Salary: ${monthlySalary()}")
+    println("Monthly Bonus: ${monthlyBonus()}")
+    println("Gross Pay: ${grossPay()}")
+    println("PAYE: ${payePayableMonthly()}")
+    println("PRSI: ${prsiPayableMonthly()}")
+    println("Total Deductions: ${totalDeductions()}")
+    println("Net Pay: ${netPay()}")
 
+    printPayslip()
+}
 
-var monthlySalary = roundTwoDecimals(grossSalary/12)
-var monthlyBonus = roundTwoDecimals(annualBonusAmount/12)
-var grossPay = roundTwoDecimals(monthlySalary+monthlyBonus)
+fun monthlySalary() = roundTwoDecimals(grossSalary/12)
+fun monthlyBonus() = roundTwoDecimals(annualBonusAmount/12)
+fun grossPay() = roundTwoDecimals(monthlySalary()+monthlyBonus())
 
-var payePayableMonthly = roundTwoDecimals(monthlySalary*PAYE/100*1)
-var prsiPayableMonthly = roundTwoDecimals(monthlySalary*PRSI/100*1)
-var totalDeductions = roundTwoDecimals(payePayableMonthly+prsiPayableMonthly+cycleToWorkSchemeMonthlyDeduction)
-var netPay =  roundTwoDecimals(grossPay - totalDeductions)
+fun payePayableMonthly() = roundTwoDecimals(monthlySalary()*PAYE/100*1)
+fun prsiPayableMonthly() = roundTwoDecimals(monthlySalary()*PRSI/100*1)
+fun totalDeductions() = roundTwoDecimals(payePayableMonthly()+prsiPayableMonthly()+cycleToWorkSchemeMonthlyDeduction)
+fun netPay() = roundTwoDecimals(grossPay()- totalDeductions())
 
 fun roundTwoDecimals(number: Double) = round(number * 100) / 100
 fun getFullName() = when (gender) {
@@ -45,13 +52,13 @@ fun printPayslip(){
             -------------------------------------------------------------------------------
                PAYMENT DETAILS                           DEDUCTION DETAILS       
             -------------------------------------------------------------------------------
-                Salary: ${(monthlySalary)}                           PAYE: ${(payePayableMonthly)} 
-                Bonus:  ${(monthlyBonus)}                           PRSI: ${(prsiPayableMonthly)}
+                Salary: ${(monthlySalary())}                           PAYE: ${(payePayableMonthly())} 
+                Bonus:  ${(monthlyBonus())}                           PRSI: ${(prsiPayableMonthly())}
                                                          Cycle To Work: ${(cycleToWorkSchemeMonthlyDeduction)}
             ------------------------------------------------------------------------------- 
-                Gross:  ${(grossPay)}                         Total Deductions: ${(totalDeductions)}    
+                Gross:  ${(grossPay())}                         Total Deductions: ${(totalDeductions())}    
             -------------------------------------------------------------------------------
-                                           NET PAY: ${(netPay)}
+                                           NET PAY: ${(netPay())}
             -------------------------------------------------------------------------------                               
                     """.trimIndent()
     )
