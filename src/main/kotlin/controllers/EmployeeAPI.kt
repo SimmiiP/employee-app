@@ -1,3 +1,6 @@
+package controllers
+
+import models.Employee
 
 var lastId = 0
 
