@@ -1,10 +1,14 @@
+import mu.KotlinLogging
 import kotlin.math.round
 
 var employees = EmployeeAPI()
 
 fun main(args: Array<String>) {
+    logger.info {"Launching Employee App"}
     start()
 }
+
+val logger = KotlinLogging.logger {}
 fun menu(): Int {
 
     print("""
@@ -39,6 +43,7 @@ fun start() {
 }
 
 fun list(){
+    logger.info {"Listing All Current Employees"}
     employees.findAll()
         .forEach{ println(it)}
 }
@@ -58,6 +63,7 @@ internal fun getEmployeeById(): Employee? {
 }
 
 fun paySlip(){
+    logger.info {"Printing Payslip for: ${getEmployeeById()}"}
     val employee = getEmployeeById()
     if (employee != null)
         println(employee.getPayslip())
