@@ -10,6 +10,7 @@ var employees = EmployeeAPI()
 
 fun main(args: Array<String>) {
     logger.info {"Launching Employee App"}
+
     start()
 }
 
@@ -22,8 +23,8 @@ fun menu(): Int {
         | 3. Search Employees by ID  
         | 4. Search Employees by Name
         | 5. Print Payslip for Employee
-        | 6. Update 
-        | 7. Delete an Employee
+        
+        | 7.
         | -1 Exit
         | Enter Option:
     """.trimIndent())
@@ -42,6 +43,7 @@ fun start() {
             3 -> searchByID()
             4 -> searchByName()
             5 -> paySlip()
+
             -99 -> dummyData()
             -1 -> println("Exiting App")
             else -> println("Invalid Option")
@@ -52,6 +54,7 @@ fun start() {
 
 fun list(){
     logger.info {"Listing All Current Employees"}
+
     employees.findAll()
         .forEach{ println(it)}
 }
@@ -81,18 +84,21 @@ internal fun getEmployeeByName(): Employee? {
     val firstName = readLine()!!.toString()
     return employees.findOneName(firstName)
 }
+
 fun paySlip(){
-    logger.info {"Printing Payslip for: ${getEmployeeById()}"}
+    logger.info {"Printing Payslip for Employee "}
+
     val employee = getEmployeeById()
     if (employee != null)
         println(employee.getPayslip())
 }
 
 fun dummyData() {
-    employees.create(Employee("Joe","Soap",'m',0,35655.43,31.0,7.5,2000.0,25.6))
-    employees.create(Employee("Joan","Murphy",'f',0, 54255.13,32.5,7.0,1500.0,55.3))
-    employees.create(Employee("Mary","Quinn",'f',0,75685.41,40.0,8.5,4500.0,0.0))
+    employees.create(Employee("Joe ","Soap",'m',0,35655.43,31.0,7.5,2000.0,25.6))
+    employees.create(Employee("Joan ","Murphy",'f',1, 54255.13,32.5,7.0,1500.0,55.3))
+    employees.create(Employee("Mary ","Quinn",'f',2,75685.41,40.0,8.5,4500.0,0.0))
 }
+
 fun add(){
     print("Enter first name: ")
     val firstName = readLine().toString()
@@ -113,11 +119,8 @@ fun add(){
     print("Enter Cycle To Work Deduction: ")
     val cycleToWorkMonthlyDeduction = readLine()!!.toDouble()
 
-    employees.create(Employee(firstName, surName, gender, 0, grossPay, payePayableMonthly , prsiPayableMonthly, annualBonusAmount, cycleToWorkMonthlyDeduction))
+    employees.create(Employee(firstName , surName, gender, employeeId, grossPay, payePayableMonthly, prsiPayableMonthly, annualBonusAmount, cycleToWorkMonthlyDeduction))
 }
 
-/*fun delete(){
-    logger.info {"Deleting an Employee"}
-    employees.findOne(id = Int)
-}
- */
+
+

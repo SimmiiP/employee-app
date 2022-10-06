@@ -55,4 +55,5 @@ class Employee(
     override fun toString(): String {
         return "Employee(firstName='$firstName', surName='$surName', gender=$gender, employeeId=$employeeId, grossSalary=$grossSalary, PAYE=$PAYE, PRSI=$PRSI, annualBonusAmount=$annualBonusAmount, cycleToWorkSchemeMonthlyDeduction=$cycleToWorkSchemeMonthlyDeduction)"
     }
+
 }
