@@ -60,6 +60,7 @@ fun list(){
 }
 
 fun searchByID(){
+    logger.info{"Searching for employees by ID"}
     val employee = getEmployeeById()
     if (employee == null)
         println("No employee found")
@@ -68,6 +69,7 @@ fun searchByID(){
 }
 
 fun searchByName(){
+    logger.info{"Searching for employees by Name"}
     val employee = getEmployeeByName()
     if (employee == null)
         println("Check your spelling")
