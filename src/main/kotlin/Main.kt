@@ -128,11 +128,12 @@ internal fun removeEmployee(employee: Employee?) {
 }
 
 fun deleteEmployee(){
+    logger.info{"Deleting Employees by their position in the Array"}
     val employee = getEmployeeById()
     if (employee == null)
         println("No employee found")
     else
-        println("are you sure you want to remove ${employee.firstName}?")
+        println("Are you sure you want to remove ${employee.firstName}?")
     return removeEmployee(employee)
 }
 
