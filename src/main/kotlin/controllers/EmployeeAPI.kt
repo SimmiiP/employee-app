@@ -20,6 +20,10 @@ class EmployeeAPI {
         return employees.find {p -> p.employeeId == id}
     }
 
+    fun findOneName(id: String): Employee? {
+        return employees.find {p -> p.firstName == id}
+    }
+
     fun create(employee: Employee){
         employee.employeeId = getId()
         employees.add(employee)

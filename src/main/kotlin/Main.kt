@@ -19,10 +19,12 @@ fun menu(): Int {
     print("""
         | 1. Add Employee
         | 2. List All Employees
-        | 3. Search Employees
-        | 4. Print Payslip for Employee
+        | 3. Search Employees by ID  
+        | 4. Search Employees by Name
+        | 5. Print Payslip for Employee
+        | 6. Update 
+        | 7. Delete an Employee
         | -1 Exit
-        |
         | Enter Option:
     """.trimIndent())
     return readLine()!!.toInt()
@@ -37,8 +39,9 @@ fun start() {
         when (input){
             1 -> add()
             2 -> list()
-            3 -> search()
-            4 -> paySlip()
+            3 -> searchByID()
+
+            5 -> paySlip()
             -99 -> dummyData()
             -1 -> println("Exiting App")
             else -> println("Invalid Option")
@@ -53,7 +56,7 @@ fun list(){
         .forEach{ println(it)}
 }
 
-fun search(){
+fun searchByID(){
     val employee = getEmployeeById()
     if (employee == null)
         println("No employee found")
@@ -66,7 +69,11 @@ internal fun getEmployeeById(): Employee? {
     val employeeID = readLine()!!.toInt()
     return employees.findOne(employeeID)
 }
-
+internal fun getEmployeeByName(): Employee? {
+    print("Enter the employee's first name to search by: ")
+    val firstName = readLine()!!.toString()
+    return employees.findOneName(firstName)
+}
 fun paySlip(){
     logger.info {"Printing Payslip for: ${getEmployeeById()}"}
     val employee = getEmployeeById()
@@ -101,3 +108,9 @@ fun add(){
 
     employees.create(Employee(firstName, surName, gender, 0, grossPay, payePayableMonthly , prsiPayableMonthly, annualBonusAmount, cycleToWorkMonthlyDeduction))
 }
+
+/*fun delete(){
+    logger.info {"Deleting an Employee"}
+    employees.findOne(id = Int)
+}
+ */
