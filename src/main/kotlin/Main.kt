@@ -40,7 +40,7 @@ fun start() {
             1 -> add()
             2 -> list()
             3 -> searchByID()
-
+            4 -> searchByName()
             5 -> paySlip()
             -99 -> dummyData()
             -1 -> println("Exiting App")
@@ -64,6 +64,13 @@ fun searchByID(){
         println(employee)
 }
 
+fun searchByName(){
+    val employee = getEmployeeByName()
+    if (employee == null)
+        println("Check your spelling")
+    else
+        println(employee)
+}
 internal fun getEmployeeById(): Employee? {
     print("Enter the employee id to search by: ")
     val employeeID = readLine()!!.toInt()
