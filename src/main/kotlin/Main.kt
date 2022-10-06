@@ -23,7 +23,7 @@ fun menu(): Int {
         | 3. Search Employees by ID  
         | 4. Search Employees by Name
         | 5. Print Payslip for Employee
-        
+        | 6. Delete an Employee
         | 7.
         | -1 Exit
         | Enter Option:
@@ -43,7 +43,7 @@ fun start() {
             3 -> searchByID()
             4 -> searchByName()
             5 -> paySlip()
-
+            6 -> deleteEmployee()
             -99 -> dummyData()
             -1 -> println("Exiting App")
             else -> println("Invalid Option")
@@ -122,5 +122,18 @@ fun add(){
     employees.create(Employee(firstName , surName, gender, employeeId, grossPay, payePayableMonthly, prsiPayableMonthly, annualBonusAmount, cycleToWorkMonthlyDeduction))
 }
 
+internal fun removeEmployee(employee: Employee?) {
+    val employeeID = readLine()!!.toInt()
+    return employees.removeOne(employeeID)
+}
+
+fun deleteEmployee(){
+    val employee = getEmployeeById()
+    if (employee == null)
+        println("No employee found")
+    else
+        println("are you sure you want to remove ${employee.firstName}?")
+    return removeEmployee(employee)
+}
 
 
