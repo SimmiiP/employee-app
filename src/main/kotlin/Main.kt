@@ -106,10 +106,17 @@ fun paySlip(){
 }
 
 fun sortByPay(){
-    logger.info{"${ANSI_YELLOW}Sorting the employees by pay Low-High"}
-    println("${ANSI_YELLOW}Sorting Employees by Pay From Low-High")
+    logger.info{"${ANSI_YELLOW}Sorting the employees by pay Low-High or High-Low"}
+    println("${ANSI_YELLOW}To sort from low to high input - Ascending, To sort from high to low input - Descending ")
+    val up: String? = readLine()
+    if (up == "Ascending" )
     employees
         .sortedByPay()
+        .forEach {println("${ANSI_YELLOW}Employee: ${it.firstName}, ${it.surName}, ${it.grossSalary}")}
+
+    if (up == "Descending")
+    employees
+        .sortedByPayDown()
         .forEach {println("${ANSI_YELLOW}Employee: ${it.firstName}, ${it.surName}, ${it.grossSalary}")}
 }
 
@@ -164,6 +171,8 @@ fun deleteEmployee() {
         println("Add new employee first!")
     else
         println("Update ${employee.firstName}'s information")
-    return employees.updateEmployee(employee)
+    if (employee != null) {
+        return employees.update()
+    }
 }*/
 
