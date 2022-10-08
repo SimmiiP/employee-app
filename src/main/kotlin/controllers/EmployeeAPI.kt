@@ -40,6 +40,14 @@ class EmployeeAPI {
         }
         employees.remove(employee)
     }
+
+    fun clear (employee: Employee?){
+        if (employee != null) {
+            employee.employeeId = getId()
+        }
+        employees.clear()
+    }
+
 }
     
 

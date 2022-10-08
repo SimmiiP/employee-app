@@ -4,7 +4,15 @@ import models.Employee
 import mu.KotlinLogging
 import kotlin.math.round
 
-
+const val ANSI_RESET = "\u001B[0m"
+const val ANSI_BLACK = "\u001B[30m"
+const val ANSI_RED = "\u001B[31m"
+const val ANSI_GREEN = "\u001B[32m"
+const val ANSI_YELLOW = "\u001B[33m"
+const val ANSI_BLUE = "\u001B[34m"
+const val ANSI_PURPLE = "\u001B[35m"
+const val ANSI_CYAN = "\u001B[36m"
+const val ANSI_WHITE = "\u001B[37m"
 
 var employees = EmployeeAPI()
 
@@ -15,30 +23,28 @@ fun main(args: Array<String>) {
 }
 
 val logger = KotlinLogging.logger {}
-fun menu(): Int {
-
+fun menu(): Any {
     print("""
-        | 1. Add Employee
-        | 2. List All Employees
-        | 3. Search Employees by ID  
-        | 4. Search Employees by Name
-        | 5. Sort Employees by Salaries Low-High
-        | 6. Print Payslip for Employee
-        | 7. Delete an Employee
-        | 8. Update an Employees Information
-        | -1 Exit
+        ${ANSI_RED}| 1. Add Employee
+        ${ANSI_GREEN}| 2. List All Employees
+        ${ANSI_PURPLE}| 3. Search Employees by ID  
+        ${ANSI_BLUE}| 4. Search Employees by Name
+        ${ANSI_YELLOW}| 5. Sort Employees by Salaries Low-High
+        ${ANSI_WHITE}| 6. Print Payslip for Employee
+        ${ANSI_CYAN}| 7. Delete an Employee
+        ${ANSI_BLACK}| 8. Update an Employees Information
+        ${ANSI_RED}| -1 Exit $ANSI_RESET
         | Enter Option:
         
     """.trimIndent())
     return readLine()!!.toInt()
+
 }
 fun roundTwoDecimals(number: Double) = round(number * 100) / 100
-
 fun start() {
     var input: Int
-
     do{
-        input = menu()
+        input = menu() as Int
         when (input){
             1 -> add()
             2 -> list()
@@ -47,7 +53,7 @@ fun start() {
             5 -> sortByPay()
             6 -> paySlip()
             7 -> deleteEmployee()
-            8 -> updateEmployee()
+            /*8 -> changeEmployee()*/
             -99 -> dummyData()
             -1 -> println("Exiting App")
             else -> println("Invalid Option")
@@ -64,19 +70,19 @@ fun list(){
 }
 
 fun searchByID(){
-    logger.info{"Searching for employees by ID"}
+    logger.info{"${ANSI_PURPLE}Searching for employee by ID"}
     val employee = getEmployeeById()
     if (employee == null)
-        println("No employee found")
+        println("${ANSI_PURPLE}No employee found ")
     else
         println(employee)
 }
 
 fun searchByName(){
-    logger.info{"Searching for employees by Name"}
+    logger.info{"${ANSI_BLUE}Searching for employees by Name"}
     val employee = getEmployeeByName()
     if (employee == null)
-        println("Check your spelling")
+        println("${ANSI_BLUE}Check your spelling")
     else
         println(employee)
 }
@@ -100,10 +106,11 @@ fun paySlip(){
 }
 
 fun sortByPay(){
-    println("Sorting Employees by Pay From Low-High")
+    logger.info{"${ANSI_YELLOW}Sorting the employees by pay Low-High"}
+    println("${ANSI_YELLOW}Sorting Employees by Pay From Low-High")
     employees
         .sortedByPay()
-        .forEach {println("Employee: ${it.firstName}, ${it.surName}, ${it.grossSalary}")}
+        .forEach {println("${ANSI_YELLOW}Employee: ${it.firstName}, ${it.surName}, ${it.grossSalary}")}
 }
 
 fun dummyData() {
@@ -113,23 +120,23 @@ fun dummyData() {
 }
 
 fun add(){
-    print("Enter first name: ")
+    print("${ANSI_RED}Enter first name: ")
     val firstName = readLine().toString()
-    print("Enter surname: ")
+    print("${ANSI_RED}Enter surname: ")
     val surName = readLine().toString()
-    print("Enter gender (m/f): ")
+    print("${ANSI_RED}Enter gender (m/f): ")
     val gender = readLine()!!.toCharArray()[0]
-    print("Enter Employee ID: ")
+    print("${ANSI_RED}Enter Employee ID: ")
     val employeeId = readLine()!!.toInt()
-    print("Enter Gross Salary: ")
+    print("${ANSI_RED}Enter Gross Salary: ")
     val grossPay = readLine()!!.toDouble()
-    print("Enter PAYE %: ")
+    print("${ANSI_RED}Enter PAYE %: ")
     val payePayableMonthly = readLine()!!.toDouble()
-    print("Enter PRSI %: ")
+    print("${ANSI_RED}Enter PRSI %: ")
     val prsiPayableMonthly = readLine()!!.toDouble()
-    print("Enter Annual Bonus: ")
+    print("${ANSI_RED}Enter Annual Bonus: ")
     val annualBonusAmount = readLine()!!.toDouble()
-    print("Enter Cycle To Work Deduction: ")
+    print("${ANSI_RED}Enter Cycle To Work Deduction: ")
     val cycleToWorkMonthlyDeduction = readLine()!!.toDouble()
 
     employees.create(Employee(firstName , surName, gender, employeeId, grossPay, payePayableMonthly, prsiPayableMonthly, annualBonusAmount, cycleToWorkMonthlyDeduction))
@@ -137,25 +144,26 @@ fun add(){
 
 
 fun deleteEmployee() {
-    logger.info{"Deleting Employees by their position in the Array"}
+    logger.info{"${ANSI_CYAN}Deleting Employees by their position in the Array"}
     val employee = getEmployeeById()
     if (employee == null)
-        println("No employee found")
+        println("${ANSI_CYAN}No employee found")
     else
-        println("Are you sure you want to remove ${employee.firstName}?")
-    var ans: String? = readLine()
+        println("${ANSI_CYAN}Are you sure you want to remove ${employee.firstName}?")
+    val ans: String? = readLine()
     if (ans == "Yes")
         return employees.removeEmployee(employee)
     if (ans == "No")
-        println("Nevermind")
+        println("${ANSI_CYAN}Nevermind")
 
 }
 
-fun updateEmployee() {
+/*fun changeEmployee() {
     val employee = getEmployeeById()
     if (employee == null)
         println("Add new employee first!")
     else
-        println("Update ${employee.firstName}'s information" )
+        println("Update ${employee.firstName}'s information")
+    return employees.updateEmployee(employee)
+}*/
 
-}

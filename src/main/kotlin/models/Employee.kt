@@ -1,5 +1,8 @@
 package models
 
+import ANSI_WHITE
+
+
 import roundTwoDecimals
 
 data class Employee(
@@ -9,6 +12,12 @@ data class Employee(
 
 
 //    var employee = Employee("Joe", "Soap", 'm', 6143, 67534.21, 38.5, 5.2, 1450.50, 54.33)
+
+    fun updateEmployee(){
+
+    }
+
+
 
     fun getFullName() = when (gender) {
         'm', 'M' -> "Mr. $firstName $surName"
@@ -30,11 +39,11 @@ data class Employee(
 
     fun getPayslip() {
         println(
-            """
+            """${ANSI_WHITE}
             -------------------------------------------------------------------------------
                                              Monthly Payslip:   
             -------------------------------------------------------------------------------
-             Employee Name: ${firstName.uppercase()}${surName.uppercase()}(${gender.uppercase()})                         Employee ID: ${employeeId}
+             Employee Name: ${getFullName().uppercase()}                Employee ID: ${employeeId}
             
             -------------------------------------------------------------------------------
                PAYMENT DETAILS                           DEDUCTION DETAILS       
