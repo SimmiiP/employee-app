@@ -22,11 +22,13 @@ fun menu(): Int {
         | 2. List All Employees
         | 3. Search Employees by ID  
         | 4. Search Employees by Name
-        | 5. Print Payslip for Employee
-        | 6. Delete an Employee
-        | 7.
+        | 5. Sort Employees by Salaries Low-High
+        | 6. Print Payslip for Employee
+        | 7. Delete an Employee
+        | 8. Update an Employees Information
         | -1 Exit
         | Enter Option:
+        
     """.trimIndent())
     return readLine()!!.toInt()
 }
@@ -42,8 +44,10 @@ fun start() {
             2 -> list()
             3 -> searchByID()
             4 -> searchByName()
-            5 -> paySlip()
-            6 -> deleteEmployee()
+            5 -> sortByPay()
+            6 -> paySlip()
+            7 -> deleteEmployee()
+            8 -> updateEmployee()
             -99 -> dummyData()
             -1 -> println("Exiting App")
             else -> println("Invalid Option")
@@ -95,6 +99,13 @@ fun paySlip(){
         println(employee.getPayslip())
 }
 
+fun sortByPay(){
+    println("Sorting Employees by Pay From Low-High")
+    employees
+        .sortedByPay()
+        .forEach {println("Employee: ${it.firstName}, ${it.surName}, ${it.grossSalary}")}
+}
+
 fun dummyData() {
     employees.create(Employee("Joe ","Soap",'m',0,35655.43,31.0,7.5,2000.0,25.6))
     employees.create(Employee("Joan ","Murphy",'f',1, 54255.13,32.5,7.0,1500.0,55.3))
@@ -124,19 +135,46 @@ fun add(){
     employees.create(Employee(firstName , surName, gender, employeeId, grossPay, payePayableMonthly, prsiPayableMonthly, annualBonusAmount, cycleToWorkMonthlyDeduction))
 }
 
-internal fun removeEmployee(employee: Employee?) {
-    val employeeID = readLine()!!.toInt()
-    return employees.removeOne(employeeID)
+ fun removeEmployee() {
+     print("Enter first name: ")
+     val firstName = readLine().toString()
+     print("Enter surname: ")
+     val surName = readLine().toString()
+     print("Enter gender (m/f): ")
+     val gender = readLine()!!.toCharArray()[0]
+     print("Enter Employee ID: ")
+     val employeeId = readLine()!!.toInt()
+     print("Enter Gross Salary: ")
+     val grossPay = readLine()!!.toDouble()
+     print("Enter PAYE %: ")
+     val payePayableMonthly = readLine()!!.toDouble()
+     print("Enter PRSI %: ")
+     val prsiPayableMonthly = readLine()!!.toDouble()
+     print("Enter Annual Bonus: ")
+     val annualBonusAmount = readLine()!!.toDouble()
+     print("Enter Cycle To Work Deduction: ")
+     val cycleToWorkMonthlyDeduction = readLine()!!.toDouble()
+    return employees.removeOne(Employee(firstName , surName, gender, employeeId, grossPay, payePayableMonthly, prsiPayableMonthly, annualBonusAmount, cycleToWorkMonthlyDeduction))
 }
 
-fun deleteEmployee(){
+fun deleteEmployee() {
     logger.info{"Deleting Employees by their position in the Array"}
     val employee = getEmployeeById()
     if (employee == null)
         println("No employee found")
     else
         println("Are you sure you want to remove ${employee.firstName}?")
-    return removeEmployee(employee)
+    var ans: String? = readLine()
+    if (ans == "Yes")
+        return removeEmployee()
+
 }
 
+fun updateEmployee() {
+    val employee = getEmployeeById()
+    if (employee == null)
+        println("Add new employee first!")
+    else
+        println("Update ${employee.firstName}'s information" )
 
+}
