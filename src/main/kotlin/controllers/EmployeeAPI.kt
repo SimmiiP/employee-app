@@ -20,10 +20,6 @@ class EmployeeAPI {
         return employees.find {p -> p.employeeId == id}
     }
 
-    fun groupAll(): List<Employee> {
-        return employees
-    }
-
     fun findOneName(id: String): Employee? {
         return employees.find {p -> p.firstName == id}
     }

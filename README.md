@@ -12,11 +12,9 @@ Array.
 ++ Search By Name 
 
 +++ I added a search by name function which allows you to search the employee up by their first name 
-instead of their employee number. I plan to add more functionality to this so that you will
-be able to search them up by their last name as well to facilitate only getting one result at the
-end of the search.
+instead of their employee number.
 
 ++ Sort by Salary Low - High
 
-+++ I added a lambdas that sorts the objects by their salary variable low to high.
++++ I added a lambdas that sorts the objects by their salary variable low to high, and prints the result First Name, Last Name, Salary.
 
