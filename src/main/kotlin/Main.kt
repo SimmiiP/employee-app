@@ -135,27 +135,6 @@ fun add(){
     employees.create(Employee(firstName , surName, gender, employeeId, grossPay, payePayableMonthly, prsiPayableMonthly, annualBonusAmount, cycleToWorkMonthlyDeduction))
 }
 
- fun removeEmployee() {
-     print("Enter first name: ")
-     val firstName = readLine().toString()
-     print("Enter surname: ")
-     val surName = readLine().toString()
-     print("Enter gender (m/f): ")
-     val gender = readLine()!!.toCharArray()[0]
-     print("Enter Employee ID: ")
-     val employeeId = readLine()!!.toInt()
-     print("Enter Gross Salary: ")
-     val grossPay = readLine()!!.toDouble()
-     print("Enter PAYE %: ")
-     val payePayableMonthly = readLine()!!.toDouble()
-     print("Enter PRSI %: ")
-     val prsiPayableMonthly = readLine()!!.toDouble()
-     print("Enter Annual Bonus: ")
-     val annualBonusAmount = readLine()!!.toDouble()
-     print("Enter Cycle To Work Deduction: ")
-     val cycleToWorkMonthlyDeduction = readLine()!!.toDouble()
-    return employees.removeOne(Employee(firstName , surName, gender, employeeId, grossPay, payePayableMonthly, prsiPayableMonthly, annualBonusAmount, cycleToWorkMonthlyDeduction))
-}
 
 fun deleteEmployee() {
     logger.info{"Deleting Employees by their position in the Array"}
@@ -166,7 +145,7 @@ fun deleteEmployee() {
         println("Are you sure you want to remove ${employee.firstName}?")
     var ans: String? = readLine()
     if (ans == "Yes")
-        return removeEmployee()
+        return employees.removeEmployee(employee)
     if (ans == "No")
         println("Nevermind")
 

@@ -2,12 +2,9 @@
 
 ++ Delete
 
-+++ My delete function works in a very strange way. It will first prompt you for the employee number of
-the employee you are trying to delete as normal, but then it will prompt you for their position in the Array and 
-delete whoever is at that position regardless. This is because I wanted to add a question "Are you sure you want to remove (Employee Name)"?
-but then I couldn't figure out how to change the Input type to a Boolean instead of a Int.
-So I used the removeAt() function instead of the remove() function which removes the object by its position in the 
-Array.
++++ I added a function to delete employees from the list. When you choose to delete and employee you will first be prompted for their employee number.
+You will then be asked if you are sure you want to delete this person. You can answer "Yes" or "No" but the first letter of the answer needs to be to uppercase.
+If you say "Yes" the employee will be deleted, but if you say "No" it will print "Nevermind"
 
 ++ Search By Name 
 
