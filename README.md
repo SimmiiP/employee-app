@@ -15,9 +15,9 @@ https://stackoverflow.com/questions/50981645/how-to-use-while-loop-to-get-answer
 +++ I added a search by name function which allows you to search the employee up by their first name 
 instead of their employee number.
 
-++ Sort by Salary Low - High
+++ Sort by Salary Low - High and High-Low
 
-+++ I added a lambdas that sorts the objects by their salary variable low to high, and prints the result First Name, Last Name, Salary.
++++ I added a lambdas that sorts the objects by their salary variable low to high when the user inputs (Ascending (*Case Sensitive)), and high to low when the user inputs (Descending(*Case Sensitive)), prints the result First Name, Last Name, Salary.
 
 ++ UX Design
 

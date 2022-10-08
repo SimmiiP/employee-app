@@ -27,6 +27,11 @@ class EmployeeAPI {
     fun sortedByPay(): List<Employee> {
         return employees.sortedBy { p -> p.grossSalary }
 
+
+    }
+    fun sortedByPayDown(): List<Employee> {
+        return employees.sortedByDescending { p ->p.grossSalary }
+
     }
 
     fun create(employee: Employee) {
@@ -34,18 +39,17 @@ class EmployeeAPI {
         employees.add(employee)
     }
 
+    /*fun update(employee: Employee) {
+        if (employee != null) {
+            employee.employeeId = getId()
+        }
+        employees.update(employee)
+    }*/
     fun removeEmployee(employee: Employee?) {
         if (employee != null) {
             employee.employeeId = getId()
         }
         employees.remove(employee)
-    }
-
-    fun clear (employee: Employee?){
-        if (employee != null) {
-            employee.employeeId = getId()
-        }
-        employees.clear()
     }
 
 }
