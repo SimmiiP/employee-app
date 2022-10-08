@@ -16,3 +16,7 @@ instead of their employee number. I plan to add more functionality to this so th
 be able to search them up by their last name as well to facilitate only getting one result at the
 end of the search.
 
+++ Sort by Salary Low - High
+
++++ I added a lambdas that sorts the objects by their salary variable low to high.
+

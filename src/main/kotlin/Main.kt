@@ -167,6 +167,8 @@ fun deleteEmployee() {
     var ans: String? = readLine()
     if (ans == "Yes")
         return removeEmployee()
+    if (ans == "No")
+        println("Nevermind")
 
 }
 
